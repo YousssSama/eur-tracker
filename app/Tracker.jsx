@@ -750,34 +750,15 @@ export default function Tracker() {
         )}
       </div>
 
-      {/* ─── Footer ─── */}
-      <div
-        style={{
-          marginTop: 20,
-          padding: "14px 20px",
-          background: "#161b22",
-          border: "1px solid #30363d",
-          borderRadius: 12,
-          fontSize: 13,
-          color: "#8b949e",
-          lineHeight: 1.6,
-        }}
-      >
-        <strong style={{ color: "#e6edf3" }}>Conseil —</strong> plus le taux
-        est élevé, plus l'euro est fort face au {cfg.name.toLowerCase()} —
-        c'est le moment d'échanger. Comparez le taux actuel au{" "}
-        <em>plus haut</em> de la période pour évaluer le bon moment.
-      </div>
-
       <div
         style={{
           textAlign: "center",
-          marginTop: 20,
+          marginTop: 24,
           fontSize: 11,
           color: "#484f58",
         }}
       >
-        Source : api.frankfurter.app (BCE) · Mis à jour chaque jour ouvré
+        Source : api.frankfurter.dev (BCE) · Mis à jour chaque jour ouvré
       </div>
     </main>
   );
