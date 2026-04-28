@@ -15,6 +15,7 @@ import {
   CURRENCIES,
   PERIODS,
   formatDate,
+  formatAxisDate,
   formatRate,
   formatEur,
   fetchHistory,
@@ -71,7 +72,7 @@ function CurrencySelector({ currency, onChange }) {
             key={c.code}
             onClick={() => onChange(c.code)}
             style={{
-              padding: "8px 16px",
+              padding: "8px 18px",
               borderRadius: 8,
               border: "none",
               background: active ? "#f0c040" : "transparent",
@@ -81,12 +82,9 @@ function CurrencySelector({ currency, onChange }) {
               fontWeight: 600,
               fontFamily: "'IBM Plex Sans', sans-serif",
               transition: "all 0.15s",
-              display: "flex",
-              alignItems: "center",
-              gap: 6,
+              letterSpacing: 0.5,
             }}
           >
-            <span style={{ fontSize: 16 }}>{c.flag}</span>
             {c.code}
           </button>
         );
@@ -143,9 +141,6 @@ function Converter({ rate, currency }) {
     letterSpacing: 1,
     textTransform: "uppercase",
     marginBottom: 6,
-    display: "flex",
-    alignItems: "center",
-    gap: 6,
   };
 
   return (
@@ -165,12 +160,9 @@ function Converter({ rate, currency }) {
           letterSpacing: 2,
           textTransform: "uppercase",
           marginBottom: 14,
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
         }}
       >
-        <span style={{ color: "#f0c040" }}>⇌</span> Convertisseur
+        Convertisseur
       </div>
 
       <div
@@ -182,9 +174,7 @@ function Converter({ rate, currency }) {
         }}
       >
         <div>
-          <div style={labelStyle}>
-            <span>🇪🇺</span> EUR
-          </div>
+          <div style={labelStyle}>EUR</div>
           <input
             type="text"
             inputMode="decimal"
@@ -201,19 +191,18 @@ function Converter({ rate, currency }) {
 
         <div
           style={{
-            color: "#f0c040",
-            fontSize: 24,
-            paddingBottom: 10,
+            color: "#484f58",
+            fontSize: 18,
+            paddingBottom: 14,
             userSelect: "none",
+            fontFamily: "'IBM Plex Mono', monospace",
           }}
         >
-          →
+          =
         </div>
 
         <div>
-          <div style={labelStyle}>
-            <span>{cfg.flag}</span> {currency}
-          </div>
+          <div style={labelStyle}>{currency}</div>
           <input
             type="text"
             inputMode="decimal"
@@ -502,14 +491,25 @@ export default function Tracker() {
               textAlign: "center",
             }}
           >
-            <div style={{ fontSize: 28 }}>
-              {isGoodTime ? "✅" : isBadTime ? "⏳" : "➖"}
+            <div
+              style={{
+                fontSize: 10,
+                letterSpacing: 2,
+                textTransform: "uppercase",
+                color: isGoodTime
+                  ? "#3fb950"
+                  : isBadTime
+                  ? "#f85149"
+                  : "#8b949e",
+                marginBottom: 6,
+              }}
+            >
+              Signal
             </div>
             <div
               style={{
-                fontSize: 15,
+                fontSize: 16,
                 fontWeight: 700,
-                marginTop: 8,
                 color: isGoodTime
                   ? "#3fb950"
                   : isBadTime
@@ -693,7 +693,7 @@ export default function Tracker() {
               <CartesianGrid strokeDasharray="3 3" stroke="#21262d" />
               <XAxis
                 dataKey="date"
-                tickFormatter={formatDate}
+                tickFormatter={(v) => formatAxisDate(v, period.days)}
                 tick={{
                   fill: "#8b949e",
                   fontSize: 11,
@@ -701,7 +701,8 @@ export default function Tracker() {
                 }}
                 axisLine={{ stroke: "#30363d" }}
                 tickLine={false}
-                interval="preserveStartEnd"
+                minTickGap={48}
+                tickMargin={8}
               />
               <YAxis
                 domain={yDomain}
@@ -762,7 +763,7 @@ export default function Tracker() {
           lineHeight: 1.6,
         }}
       >
-        💡 <strong style={{ color: "#e6edf3" }}>Conseil :</strong> plus le taux
+        <strong style={{ color: "#e6edf3" }}>Conseil —</strong> plus le taux
         est élevé, plus l'euro est fort face au {cfg.name.toLowerCase()} —
         c'est le moment d'échanger. Comparez le taux actuel au{" "}
         <em>plus haut</em> de la période pour évaluer le bon moment.

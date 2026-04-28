@@ -3,14 +3,12 @@ export const CURRENCIES = {
   IDR: {
     code: "IDR",
     name: "Roupie indonésienne",
-    flag: "🇮🇩",
     decimals: 0,
     short: "Rp",
   },
   MYR: {
     code: "MYR",
     name: "Ringgit malaisien",
-    flag: "🇲🇾",
     decimals: 2,
     short: "RM",
   },
@@ -32,7 +30,27 @@ export function getDateBefore(days) {
 
 export function formatDate(str) {
   const d = new Date(str);
-  return d.toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+  return d.toLocaleDateString("fr-FR", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+}
+
+// Compact axis label, adapted to the period length
+export function formatAxisDate(str, days) {
+  const d = new Date(str);
+  if (days <= 31) {
+    return d.toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+  }
+  if (days <= 180) {
+    const month = d.toLocaleDateString("fr-FR", { month: "short" });
+    const yy = String(d.getFullYear()).slice(-2);
+    return `${month} ${yy}`;
+  }
+  const month = d.toLocaleDateString("fr-FR", { month: "short" });
+  const yy = String(d.getFullYear()).slice(-2);
+  return `${month} ${yy}`;
 }
 
 // Number formatting per currency
