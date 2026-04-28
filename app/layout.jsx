@@ -1,6 +1,7 @@
 export const metadata = {
   title: "Suivi de change EUR",
-  description: "Taux de change Euro vers Roupie indonésienne et Ringgit malaisien",
+  description:
+    "Comparez en direct le taux de l'euro face à plusieurs devises — historique, statistiques et convertisseur, données BCE.",
 };
 
 export default function RootLayout({ children }) {
