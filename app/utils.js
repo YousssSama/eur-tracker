@@ -12,6 +12,18 @@ export const CURRENCIES = {
     decimals: 2,
     short: "RM",
   },
+  SEK: {
+    code: "SEK",
+    name: "Couronne suédoise",
+    decimals: 2,
+    short: "kr",
+  },
+  CAD: {
+    code: "CAD",
+    name: "Dollar canadien",
+    decimals: 2,
+    short: "C$",
+  },
 };
 
 export const PERIODS = [
