@@ -57,7 +57,7 @@ export function formatEur(amount) {
 export async function fetchHistory(currency, days) {
   const start = getDateBefore(days);
   const today = new Date().toISOString().split("T")[0];
-  const url = `https://api.frankfurter.app/${start}..${today}?from=EUR&to=${currency}`;
+  const url = `https://api.frankfurter.dev/v1/${start}..${today}?from=EUR&to=${currency}`;
 
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error("API error");
@@ -70,7 +70,7 @@ export async function fetchHistory(currency, days) {
 
 // API: fetch live rate (latest available)
 export async function fetchLatest(currency) {
-  const url = `https://api.frankfurter.app/latest?from=EUR&to=${currency}`;
+  const url = `https://api.frankfurter.dev/v1/latest?from=EUR&to=${currency}`;
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error("API error");
   const json = await res.json();
